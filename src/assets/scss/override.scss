@@ -1,0 +1,16 @@
+a {
+  transition: all 0.15s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    color: $primary !important;
+  }
+}
+
+.form-control,
+.form-select {
+  height: rem(48px);
+}
+
+textarea {
+  height: rem(100px) !important;
+}

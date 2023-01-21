@@ -1,0 +1,11 @@
+@import "bootstrap/scss/forms";
+
+.form {
+  &-control {
+    &.search {
+      height: rem(60px) !important;
+      border-radius: 2rem !important;
+      padding-inline-start: 1.5rem !important;
+    }
+  }
+}

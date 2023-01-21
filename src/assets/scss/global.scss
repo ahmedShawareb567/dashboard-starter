@@ -1,0 +1,106 @@
+// $enable-shadows: true;
+$is-rtl: false;
+$rfs-breakpoint: 1300px;
+$rfs-base-value: 30px;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+) !default;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1200px,
+  xxl: 1400px,
+) !default;
+
+$theme-colors: (
+  "primary": #0a4a4a,
+  "secondary": #b3db44,
+  "danger": #c6092b,
+  "warning": #ffc107,
+  "success": #14ae2d,
+  "info": #00bcd529,
+  "dark": #231f20,
+);
+
+$primary: #0a4a4a;
+$secondary: #b3db44;
+$danger: #c6092b;
+$warning: #ffc107;
+$success: #14ae2d;
+$info: #00bcd529;
+$dark: #000;
+$body-bg: #fff;
+$body-color: #0a4a4a;
+$gray-300: #0a4a4a;
+$gray-400: #c1c6cf;
+$gray-500: #a8d629;
+$gray-600: #959595;
+$gray-700: #959595;
+$border-radius: 3rem;
+$gray-300: #f9f9f9;
+$input-border-color: #f8f8f8;
+$input-bg: #f8f8f8;
+$input-color: #000;
+$input-font-weight: 500;
+$input-border-radius: 4px;
+$input-placeholder-color: #0a4a4a;
+$link-color: inherit;
+$link-decoration: none;
+$link-hover-decoration: none;
+$link-hover-color: $primary;
+$headings-font-weight: 700;
+
+$btn-font-weight: 700;
+$btn-font-size: 14px;
+
+$font-weight-bolder: 700;
+$font-family-base: "Inter", sans-serif;
+
+$grid-gutter-width: 1.875rem;
+$box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+$box-shadow-secondary: 0rem 0rem 0rem 0.25rem rgba(255, 242, 0, 0.2);
+$table-radius: 0.3rem;
+$input-padding-y: 0.6rem;
+
+// Configuration
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+// // Layout & components
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+
+// // Helpers
+@import "bootstrap/scss/helpers";
+
+@import "bootstrap/scss/utilities/api";
+
+// // Custom Variables
+$border-radius-xl: 4px;
+$box-shadow-lg: 0px 0px 15px 6px rgba(0, 0, 0, 0.1);
+$box-shadow-xl: 0px 22px 33px rgba(0, 0, 0, 0.04);
+$font-weight-medium: 500;
+$font-weight-semi: 600;
+$font-family-heading: "Inter", sans-serif;
+
+@function aspectRatio($width, $height) {
+  @return calc($height / $width) * 100%;
+}
+
+@function rem($size) {
+  @return calc($size / 16px) * 1rem;
+}
