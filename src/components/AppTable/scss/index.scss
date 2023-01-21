@@ -1,0 +1,131 @@
+.appTable {
+  &-main {
+    position: relative;
+    background-color: $gray-500;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom-left-radius: rem(8px);
+    border-bottom-right-radius: rem(8px);
+  }
+  &-loading {
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+    width: 100%;
+    height: 100%;
+    border-radius: rem(8px);
+    background-color: #{scale-color($primary, $alpha: -95%)};
+    &.no-data {
+      position: relative;
+      padding: 2rem 0rem;
+      background-color: transparent;
+    }
+  }
+  &-noData {
+    .icon {
+      width: 1.7rem !important;
+      height: 1.7rem !important;
+    }
+  }
+  &-image {
+    margin: 0rem auto;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 0.3rem;
+    border: 0.15rem solid $gray-500;
+    overflow: hidden;
+    background-color: $gray-400;
+  }
+  &-content {
+    position: relative;
+    overflow-x: auto;
+    margin: 0rem 1rem 0rem 1rem;
+    table {
+      display: table;
+      border: 0px solid transparent;
+      width: 100%;
+      text-align: center;
+      padding: 1rem;
+      border-top-left-radius: rem(8px);
+      border-top-right-radius: rem(8px);
+      overflow: hidden;
+      @include media-breakpoint-down(lg) {
+        width: rem(1300px);
+      }
+      thead {
+        background-color: #d3e0f6;
+        tr {
+          th {
+            padding: 1rem 0rem;
+          }
+        }
+      }
+      tbody {
+        tr {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          transition: all 0.05s ease-in-out;
+          td {
+            padding: 0.5rem;
+          }
+          &:last-child {
+            border-color: transparent;
+          }
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.03);
+          }
+        }
+      }
+    }
+  }
+  &-pagination {
+    button {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 0.1rem solid $input-bg;
+      margin: 0.2rem;
+      border-radius: 0.2rem;
+      cursor: pointer;
+      background-color: transparent;
+      color: $body-color;
+      transition: all 0.1s ease-in-out;
+      &:hover {
+        border-color: $primary;
+        color: $white;
+        background-color: $primary;
+      }
+      &:disabled {
+        background-color: $input-bg;
+        border-color: $input-bg;
+        color: $body-color;
+        cursor: no-drop;
+      }
+    }
+    .icon {
+      width: 0.8rem !important;
+      height: 0.8rem !important;
+    }
+
+    &-input {
+      display: inline-block !important;
+      width: 4rem !important;
+      padding-right: 0rem !important;
+      height: rem(40px) !important;
+    }
+  }
+  &-controls {
+    &-button {
+      width: 2.2rem;
+      height: 2.2rem;
+      background-color: $input-bg;
+      border-radius: 50%;
+      border: 0.1rem solid transparent;
+      transition: all 0.1s ease-in-out;
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: $primary;
+        color: $white !important;
+      }
+    }
+  }
+}

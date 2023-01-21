@@ -7,17 +7,27 @@ interface TextInputInterface {
   type?: string;
   label?: string;
   placeholder?: string;
+  className?: string;
   onChange?: (value) => void;
   onBlur?: (value) => void;
 }
 
 export const TextInput = forwardRef<any, TextInputInterface>(
   (
-    { type = "text", placeholder = "", onChange, onBlur, name, label, errors },
+    {
+      type = "text",
+      placeholder = "",
+      onChange,
+      onBlur,
+      name,
+      label,
+      errors,
+      ...rest
+    },
     ref
   ) => {
     return (
-      <div className="textInput">
+      <div {...rest}>
         {label && <label htmlFor={name}>{label}</label>}
 
         {type != "textarea" ? (

@@ -43,3 +43,13 @@ To preview the app after build, run the following command 🚀 :
 ```pash
 yarn preview
 ```
+
+## Gradients 🐉
+
+# [React Select](https://react-select.com/home)
+
+# [React Hook Form](https://react-hook-form.com/)
+
+# [React Table](https://react-table-v7.tanstack.com/)
+
+# [React Use](https://github.com/streamich/react-use)
