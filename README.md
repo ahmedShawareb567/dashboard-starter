@@ -2,7 +2,7 @@
 
 Welcome to my React app! This app was built using [Vite](https://vitejs.dev/), [React](https://reactjs.org/), [TypeScript](https://www.typescriptlang.org/), [Redux](https://redux.js.org/), [Bootstrap](https://getbootstrap.com/), and [SCSS](https://sass-lang.com/).
 
-## Node version (v16.14.1)
+## Node version >= (v16.14.1)
 
 ## Getting Started
 
