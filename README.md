@@ -46,7 +46,7 @@ yarn preview
 
 ## Gradients 🐉
 
-[React Select](https://react-select.com/home)
-[React Hook Form](https://react-hook-form.com/)
-[React Table](https://react-table-v7.tanstack.com/)
-[React Use](https://github.com/streamich/react-use)
+- [React Select](https://react-select.com/home)
+- [React Hook Form](https://react-hook-form.com/)
+- [React Table](https://react-table-v7.tanstack.com/)
+- [React Use](https://github.com/streamich/react-use)
