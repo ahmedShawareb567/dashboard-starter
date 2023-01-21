@@ -35,6 +35,7 @@ export const useAuth = create<UseAuthInterface>((set) => ({
       }
     } catch (e) {
       localStorage.removeItem("token");
+      window.location.reload();
     }
 
     set(() => ({ isLoading: false }));

@@ -18,7 +18,7 @@ export enum SelectType {
   ASYNC = "ASYNC",
 }
 
-interface OptionInterface {
+export interface OptionInterface {
   label: string;
   value: any;
 }

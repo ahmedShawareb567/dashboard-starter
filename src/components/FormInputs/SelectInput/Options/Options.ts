@@ -102,6 +102,7 @@ const asyncMultiValue = (css, state) => ({
 const asyncMultiValueLabel = (css, state) => ({
   ...css,
   color: colors.white,
+  marginRight: "3px",
 });
 
 const asyncMultiValueRemove = (css, state) => ({
@@ -115,7 +116,7 @@ const asyncMultiValueRemove = (css, state) => ({
   alignItems: "center",
   justifyContent: "center",
   "&:hover": {
-    color: "colors.primary",
+    color: colors.primary,
   },
 });
 
