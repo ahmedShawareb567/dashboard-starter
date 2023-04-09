@@ -1,0 +1,13 @@
+.shimmer {
+  &-header {
+    &-circle {
+      width: 4rem;
+      height: 4rem;
+      background-color: $gray-200;
+    }
+    &-rectangle {
+      height: 1.5rem;
+      background-color: $gray-200;
+    }
+  }
+}

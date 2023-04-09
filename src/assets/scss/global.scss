@@ -30,6 +30,17 @@ $theme-colors: (
   "dark": #231f20,
 );
 
+$aspect-ratios: (
+  "1x1": 100%,
+  "4x3": calc(3 / 4 * 100%),
+  "16x9": calc(9 / 16 * 100%),
+  "21x9": calc(9 / 21 * 100%),
+  "6x2": calc(2 / 6 * 100%),
+  "2x1": calc(1 / 2 * 100%),
+  "3x2": calc(2 / 3 * 100%),
+  "15x1": calc(1 / 15 * 100%),
+);
+
 $primary: #0a4a4a;
 $secondary: #b3db44;
 $danger: #c6092b;
@@ -39,13 +50,14 @@ $info: #00bcd529;
 $dark: #000;
 $body-bg: #fff;
 $body-color: #0a4a4a;
-$gray-300: #0a4a4a;
+$gray-200: #ecebebe7;
+$gray-300: #f9f9f9;
 $gray-400: #c1c6cf;
-$gray-500: #a8d629;
+$gray-500: #c1c6cf;
 $gray-600: #959595;
 $gray-700: #959595;
 $border-radius: 3rem;
-$gray-300: #f9f9f9;
+
 $input-border-color: #f8f8f8;
 $input-bg: #f8f8f8;
 $input-color: #000;

@@ -1,9 +1,12 @@
-import "./index.scss";
+import "./scss/index.scss";
 
 import { useTable, usePagination } from "react-table";
 import { SvgIcon } from "../SvgIcon/Index";
 import { Loading } from "../Loading/Index";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useQuery } from "../../helpers/hooks";
+import { Shimmer } from "../Shimmers/Index";
+import { ShimmerTypes } from "../Shimmers/types";
 
 interface AppTableInterface {
   onPageChange?: (v: any) => void;
@@ -11,7 +14,6 @@ interface AppTableInterface {
   data?: any;
   total?: any;
   loading?: boolean;
-  baseUrl?: any;
   label?: any;
   manual?: boolean;
 }
@@ -21,11 +23,13 @@ export const AppTable = ({
   data,
   total,
   loading,
-  baseUrl,
   label,
   onPageChange,
   manual = false,
 }: AppTableInterface) => {
+  const { location, params: queryString } = useQuery();
+  const shallowPage = queryString?.get("page");
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -39,7 +43,6 @@ export const AppTable = ({
     gotoPage,
     nextPage,
     previousPage,
-    setPageSize,
     state: { pageIndex, pageSize },
   } = useTable(
     {
@@ -48,12 +51,37 @@ export const AppTable = ({
       ...(!manual && {
         manualPagination: true,
         pageCount: Math.ceil(total / 10),
-        initialState: { pageIndex: 0, pageSize: 10 },
+        initialState: {
+          pageIndex: shallowPage ? parseInt(shallowPage) - 1 : 0,
+          pageSize: 10,
+        },
       }),
-      ...(manual && { initialState: { pageIndex: 0, pageSize: 10 } }),
+      ...(manual && {
+        initialState: {
+          pageIndex: shallowPage ? parseInt(shallowPage) - 1 : 0,
+          pageSize: 10,
+        },
+      }),
     },
     usePagination
   );
+
+  const navigate = useNavigate();
+
+  const onPageChangeAction = (page) => {
+    navigate(`${location?.pathname}${page > 1 ? `?page=${page}` : ""}`);
+    onPageChange?.(page);
+  };
+
+  if (loading && !data?.length) {
+    return (
+      <>
+        <Shimmer type={ShimmerTypes.HEADER} cols={1} />
+        <Shimmer type={ShimmerTypes.CARD} cols={4} />
+        <Shimmer type={ShimmerTypes.HEADER} cols={1} />
+      </>
+    );
+  }
 
   return (
     <>
@@ -80,31 +108,7 @@ export const AppTable = ({
                       {row.cells.map((cell) => {
                         return (
                           <td {...cell.getCellProps()}>
-                            {cell.column.id !== "controls" && (
-                              <>{cell.render("Cell")}</>
-                            )}
-
-                            {cell.column.id === "controls" && (
-                              <div className="appTable-controls d-flex align-items-center justify-content-center flex-wrap">
-                                {cell.column.value.view && (
-                                  <Link
-                                    to={`/${baseUrl}/view/${cell.row.original._id}`}
-                                    className="appTable-controls-button d-flex align-items-center justify-content-center mx-1"
-                                  >
-                                    <SvgIcon name="eye" />
-                                  </Link>
-                                )}
-
-                                {cell.column.value.edit && (
-                                  <Link
-                                    to={`/${baseUrl}/edit/${cell.row.original._id}`}
-                                    className="appTable-controls-button d-flex align-items-center justify-content-center mx-1"
-                                  >
-                                    <SvgIcon name="edit" />
-                                  </Link>
-                                )}
-                              </div>
-                            )}
+                            {cell.render("Cell")}
                           </td>
                         );
                       })}
@@ -116,24 +120,61 @@ export const AppTable = ({
 
             {loading && (
               <div
-                className={`appTable-loading d-flex align-items-center justify-content-center ${
-                  !data.length && "no-data"
-                }`}
+                className={`appTable-loading d-flex align-items-center justify-content-center`}
               >
-                <Loading size="sm" />
-              </div>
-            )}
-
-            {data.length == "0" && !loading && (
-              <div className="appTable-noData text-center pb-4 pt-5">
-                <SvgIcon name="database-o" className="d-block text-danger" />
-                <p className="mb-0 badge fs-xs">No Data{label}</p>
+                <Loading size="md" />
               </div>
             )}
           </div>
         </div>
 
-        <div className="d-flex align-items-center justify-content-end flex-wrap">
+        <div className="d-flex align-items-center flex-wrap">
+          <span className="fs-xs fw-bold px-3">
+            <strong className="px-2">
+              {pageIndex + 1} from {pageOptions.length}
+            </strong>
+            Page
+          </span>
+
+          <div className="appTable-pagination me-4">
+            <button
+              onClick={() => {
+                if (!manual) onPageChangeAction?.(1);
+                gotoPage(0);
+              }}
+              disabled={!canPreviousPage}
+            >
+              <SvgIcon name="chevron-double-left" />
+            </button>
+            <button
+              onClick={() => {
+                if (!manual) onPageChangeAction?.(pageIndex);
+                previousPage();
+              }}
+              disabled={!canPreviousPage}
+            >
+              <SvgIcon name="chevron-left-o" />
+            </button>
+            <button
+              onClick={() => {
+                if (!manual) onPageChangeAction?.(pageIndex + 2);
+                nextPage();
+              }}
+              disabled={!canNextPage}
+            >
+              <SvgIcon name="chevron-right" />
+            </button>
+            <button
+              onClick={() => {
+                if (!manual) onPageChangeAction?.(pageCount);
+                gotoPage(pageCount - 1);
+              }}
+              disabled={!canNextPage}
+            >
+              <SvgIcon name="chevron-double-right" />
+            </button>
+          </div>
+
           <div className="appTable-pagination-pageBox d-flex align-items-center">
             <span className="me-sm fs-xs fw-semiBold">Go to page : </span>
             <span>
@@ -148,58 +189,12 @@ export const AppTable = ({
 
                   const page = e.target.value ? Number(e.target.value) - 1 : 0;
 
-                  onPageChange?.(page + 1);
+                  if (!manual) onPageChangeAction?.(page + 1);
                   gotoPage(page);
                 }}
                 className="form-control appTable-pagination-input"
               />
             </span>
-          </div>
-
-          <span className="fs-xs fw-bold px-3">
-            <strong className="px-2">
-              {pageIndex + 1} from {pageOptions.length}
-            </strong>
-            Page
-          </span>
-
-          <div className="appTable-pagination me-4">
-            <button
-              onClick={() => {
-                if (!manual) onPageChange?.(1);
-                gotoPage(0);
-              }}
-              disabled={!canPreviousPage}
-            >
-              <SvgIcon name="chevron-double-left" />
-            </button>
-            <button
-              onClick={() => {
-                if (!manual) onPageChange?.(pageIndex);
-                previousPage();
-              }}
-              disabled={!canPreviousPage}
-            >
-              <SvgIcon name="chevron-left-o" />
-            </button>
-            <button
-              onClick={() => {
-                if (!manual) onPageChange?.(pageIndex + 2);
-                nextPage();
-              }}
-              disabled={!canNextPage}
-            >
-              <SvgIcon name="chevron-right" />
-            </button>
-            <button
-              onClick={() => {
-                if (!manual) onPageChange?.(pageCount);
-                gotoPage(pageCount - 1);
-              }}
-              disabled={!canNextPage}
-            >
-              <SvgIcon name="chevron-double-right" />
-            </button>
           </div>
         </div>
       </div>
@@ -212,6 +207,5 @@ AppTable.defaultProps = {
   data: [],
   total: 0,
   loading: false,
-  baseUrl: "#",
   label: "",
 };

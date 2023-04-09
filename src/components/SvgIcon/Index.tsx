@@ -1,6 +1,6 @@
 import Sprites from "../../sprites.svg";
 
-import "./index.scss";
+import "./scss/index.scss";
 
 export const SvgIcon = ({ name, ...rest }) => {
   return (

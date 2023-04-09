@@ -216,6 +216,26 @@ $positions: (
   }
 }
 
+.bg {
+  &-gray {
+    &-200 {
+      background-color: $gray-200;
+    }
+    &-300 {
+      background-color: $gray-300;
+    }
+    &-400 {
+      background-color: $gray-400;
+    }
+    &-500 {
+      background-color: $gray-500;
+    }
+    &-600 {
+      background-color: $gray-600;
+    }
+  }
+}
+
 .border {
   &-1 {
     border: 0.15rem solid $gray-500;
@@ -234,5 +254,11 @@ $positions: (
 .b {
   &-bottom {
     border-bottom: 0.1rem solid $gray-400;
+  }
+}
+
+.border-r {
+  &-1 {
+    border-radius: 1rem;
   }
 }

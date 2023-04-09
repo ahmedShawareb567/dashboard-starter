@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { $axios } from "../../client/axios";
 import {
@@ -6,8 +6,14 @@ import {
   SelectType,
 } from "../../components/FormInputs/SelectInput/Index";
 import { TextInput } from "../../components/FormInputs/TextInput/Index";
+import { Shimmer } from "../../components/Shimmers/Index";
+import { ShimmerTypes } from "../../components/Shimmers/types";
+import { useEffectOnce, useAsync } from "react-use";
+import { AppTable } from "../../components/AppTable/Index";
 
 export default () => {
+  const [passengers, setPassengers] = useState();
+
   const [statusOptions, setStatusOptions] = useState([
     {
       label: "Active",
@@ -21,16 +27,18 @@ export default () => {
 
   const fetchRolesData = async (inputValue: string) => {
     try {
-      const { data } = await $axios.get(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
+      // const { data } = await $axios.get(
+      //   "https://jsonplaceholder.typicode.com/posts"
+      // );
 
-      return (
-        data.map((i) => ({
-          value: i.id,
-          label: i.title,
-        })) || []
-      );
+      // return (
+      //   data.map((i) => ({
+      //     value: i.id,
+      //     label: i.title,
+      //   })) || []
+      // );
+
+      return [];
     } catch (e) {
       console.log(e);
     }
@@ -56,7 +64,7 @@ export default () => {
   return (
     <div className="login">
       <div className="container">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="mb-xl">
           <div className="row">
             <TextInput
               className="col-md-6 mb-3"
@@ -111,6 +119,10 @@ export default () => {
 
           <button className="btn btn-primary">Click</button>
         </form>
+
+        {/* <Shimmer type={ShimmerTypes.HEADER} cols={1} />
+        <Shimmer type={ShimmerTypes.CARD} cols={4} />
+        <Shimmer type={ShimmerTypes.HEADER} cols={1} /> */}
       </div>
     </div>
   );
