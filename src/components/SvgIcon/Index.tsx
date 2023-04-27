@@ -1,13 +1,11 @@
-import Sprites from "../../sprites.svg";
-
 import "./scss/index.scss";
 
-export const SvgIcon = ({ name, ...rest }) => {
+export const SvgIcon = ({ name = "", prefix = "icon", ...props }) => {
+  const symbolId = `#${prefix}-${name}`;
+
   return (
-    <span {...rest}>
-      <svg className={`icon icon-${name}`} fill="currentColor">
-        <use href={`${Sprites}#icon-${name}`} />
-      </svg>
-    </span>
+    <svg {...props} aria-hidden="true" className="icon">
+      <use href={symbolId} />
+    </svg>
   );
 };

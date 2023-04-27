@@ -10,6 +10,7 @@ import { Shimmer } from "../../components/Shimmers/Index";
 import { ShimmerTypes } from "../../components/Shimmers/types";
 import { useEffectOnce, useAsync } from "react-use";
 import { AppTable } from "../../components/AppTable/Index";
+import { SvgIcon } from "../../components/SvgIcon/Index";
 
 export default () => {
   const [passengers, setPassengers] = useState();
@@ -119,6 +120,10 @@ export default () => {
 
           <button className="btn btn-primary">Click</button>
         </form>
+
+        <SvgIcon name="favorite" />
+        <SvgIcon name="home" />
+        <SvgIcon name="settings" />
 
         {/* <Shimmer type={ShimmerTypes.HEADER} cols={1} />
         <Shimmer type={ShimmerTypes.CARD} cols={4} />
